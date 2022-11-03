@@ -1,12 +1,13 @@
 import express from "express";
-
-const port = 4000;
+import * as dotenv from "dotenv";
+const { log } = console;
+dotenv.config();
 const app = express();
-
+const port = process.env.PORT;
 const server = app.listen(port, () => {
-  console.log(`Server listening on: http://localhost:${port}`);
+  log(`Server listening on: http://localhost:${port}`);
 });
 
 server.on("error", (error) => {
-  console.log("Error on starting server", error.message);
+  log("Error on starting server", error.message);
 });
