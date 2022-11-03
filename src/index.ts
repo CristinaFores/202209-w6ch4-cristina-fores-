@@ -1,13 +1,21 @@
 import express from "express";
+import morgan from "morgan";
 import * as dotenv from "dotenv";
+import { getThings } from "./controllers/controllers.js";
 const { log } = console;
+
 dotenv.config();
-const app = express();
+
 const port = process.env.PORT;
 
-app.use((req, res) => {
-  res.status(200).json({ message: "ENPOINT NOT FOUND" });
-});
+const app = express();
+
+app.use(morgan("dev"));
+
+app.use(express.json());
+
+app.get("/things", getThings);
+
 app.listen(port, () => {
   log(`Server listening on: ${port}`);
 });
