@@ -1,7 +1,11 @@
 import express from "express";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
-import { getThings } from "./controllers/controllers.js";
+import {
+  deletethingKnowId,
+  getThings,
+  getThingsId,
+} from "./controllers/controllers.js";
 
 const { log } = console;
 
@@ -17,7 +21,9 @@ app.use(express.json());
 
 app.get("/things", getThings);
 
-app.get("/things/:idThing");
+app.get("/things/:idThing", getThingsId);
+
+app.delete("/things/:idThing", deletethingKnowId);
 
 app.listen(port, () => {
   log(`Server listening on: ${port}`);
